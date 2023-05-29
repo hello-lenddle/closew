@@ -42,6 +42,7 @@
       </div>
         <h1>Success</h1>
         <p>We received your purchase request;<br/> we'll be in touch shortly!</p>
+    <p id="hello"></p>
       </div>
 <!-- your html... -->
 
@@ -51,17 +52,17 @@ var countdownFrom = 5;  // number of seconds
 var countdownwin;
 
 function CountDownPopup() {
-    countdownwin = window.open("","_self","height=200,width=200");
+
     self.setInterval('CountDownTimer()',1000)
 }
 function CountDownTimer()
 {
-    if (countdownFrom==0) {countdownwin.close(); window.close(); }
+    if (countdownFrom <= 0) {
+        history.go(-(window.history.length - 1))
+    }
     else     {
-        doc = countdownwin.document;
-            doc.open('text/html');
-            doc.write("Closing in "+countdownFrom+" seconds");
-            doc.close();
+        doc = document.getElementById("hello")
+        doc.innerHTML = "Closing in "+countdownFrom+" seconds";
         }
 countdownFrom--
 }
